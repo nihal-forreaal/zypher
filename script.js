@@ -96,13 +96,40 @@ document.addEventListener('DOMContentLoaded', () => {
             }, false);
         });
 
+        let selectedFile = null;
+
         dropzone.addEventListener('drop', (e) => {
             let dt = e.dataTransfer;
             let files = dt.files;
             if(files.length) {
-                dropzone.querySelector('p').innerHTML = `Selected: <span class="gradient-text">${files[0].name}</span>`;
+                selectedFile = files[0];
+                dropzone.querySelector('p').innerHTML = `Selected: <span class="gradient-text">${selectedFile.name}</span>`;
             }
         });
+
+        const confirmUploadBtn = document.getElementById('confirmUploadBtn');
+        if (confirmUploadBtn) {
+            confirmUploadBtn.addEventListener('click', async () => {
+                if (!selectedFile) {
+                    alert("Please select a file first.");
+                    return;
+                }
+                try {
+                    confirmUploadBtn.textContent = 'Uploading...';
+                    await window.fbUploadAsset(selectedFile, selectedFile.name, 'Uploaded via Web', (progress) => {
+                        confirmUploadBtn.textContent = `Uploading... ${Math.round(progress)}%`;
+                    });
+                    alert('Upload successful!');
+                    modal.classList.add('hidden');
+                    selectedFile = null;
+                    dropzone.querySelector('p').innerHTML = `Drag and drop your file here, or <span class="gradient-text">click to browse</span>`;
+                } catch (error) {
+                    alert("Upload failed: " + error.message);
+                } finally {
+                    confirmUploadBtn.textContent = 'Upload';
+                }
+            });
+        }
     }
 
     // Authentication Modal Logic

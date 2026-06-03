@@ -7,12 +7,13 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://w
 // 🔴 IMPORTANT: REPLACE THIS CONFIGURATION 🔴
 // ==========================================
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyAjbvdkin6Wb28Smf64hAqcLlWpRANO3dI",
+  authDomain: "zypher-549b2.firebaseapp.com",
+  projectId: "zypher-549b2",
+  storageBucket: "zypher-549b2.firebasestorage.app",
+  messagingSenderId: "381454771415",
+  appId: "1:381454771415:web:a4b6064046bfab730abc92",
+  measurementId: "G-MN4EQ2EQDR"
 };
 
 // Initialize Firebase

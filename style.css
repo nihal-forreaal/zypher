@@ -1,11 +1,27 @@
 :root {
-    --bg-dark: #0f172a;
+    --bg-main: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --primary-gradient: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    --secondary-bg: rgba(0, 0, 0, 0.05);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --mesh-1: rgba(37, 99, 235, 0.15);
+    --mesh-2: rgba(59, 130, 246, 0.15);
+    --card-bg: rgba(255, 255, 255, 0.6);
+}
+
+body.dark-mode {
+    --bg-main: #0f172a;
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
     --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
     --secondary-bg: rgba(255, 255, 255, 0.05);
     --glass-border: rgba(255, 255, 255, 0.1);
     --glass-bg: rgba(15, 23, 42, 0.6);
+    --mesh-1: rgba(59, 130, 246, 0.15);
+    --mesh-2: rgba(139, 92, 246, 0.15);
+    --card-bg: rgba(255, 255, 255, 0.03);
 }
 
 * {
@@ -16,10 +32,11 @@
 
 body {
     font-family: 'Outfit', sans-serif;
-    background-color: var(--bg-dark);
+    background-color: var(--bg-main);
     color: var(--text-main);
     overflow-x: hidden;
     line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Background Mesh Gradient */
@@ -29,8 +46,8 @@ body {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15), transparent 40%),
-                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15), transparent 30%);
+    background: radial-gradient(circle at 50% 50%, var(--mesh-1), transparent 40%),
+                radial-gradient(circle at 80% 20%, var(--mesh-2), transparent 30%);
     z-index: -1;
     animation: meshMovement 20s ease-in-out infinite alternate;
 }
@@ -189,7 +206,7 @@ button {
 }
 
 .glass-card {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--card-bg);
     border: 1px solid var(--glass-border);
     border-radius: 24px;
     padding: 2rem;
@@ -208,7 +225,7 @@ button {
 .glass-card h3 {
     font-weight: 600;
     margin-bottom: 1.5rem;
-    color: #e2e8f0;
+    color: var(--text-main);
 }
 
 .status-indicator {
@@ -285,7 +302,7 @@ button {
 }
 
 .asset-card {
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--card-bg);
     border: 1px solid var(--glass-border);
     border-radius: 16px;
     overflow: hidden;
@@ -399,7 +416,7 @@ button {
     text-align: center;
     margin-bottom: 2rem;
     transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--card-bg);
     cursor: pointer;
 }
 

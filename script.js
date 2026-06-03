@@ -227,8 +227,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            authSubmitBtn.textContent = 'Loading...';
+            authSubmitBtn.textContent = 'Security Check...';
             try {
+                // Execute reCAPTCHA Enterprise security check
+                await new Promise((resolve, reject) => {
+                    if (typeof grecaptcha === 'undefined' || typeof grecaptcha.enterprise === 'undefined') {
+                        console.warn('reCAPTCHA not loaded, proceeding without it.');
+                        resolve();
+                        return;
+                    }
+                    grecaptcha.enterprise.ready(async () => {
+                        try {
+                            const token = await grecaptcha.enterprise.execute('6LcDBwstAAAAAE4iEHxqNbNHRfoHAcPvZrurd9Cx', {action: 'login'});
+                            if (!token) throw new Error("Security check failed.");
+                            resolve();
+                        } catch(e) {
+                            reject(e);
+                        }
+                    });
+                });
+
+                authSubmitBtn.textContent = 'Loading...';
                 if (isLoginMode) {
                     await window.fbLogin(email, password);
                 } else {

@@ -104,4 +104,73 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Authentication Modal Logic
+    const loginModal = document.getElementById('loginModal');
+    const openLoginBtn = document.getElementById('openLoginBtn');
+    const closeLoginBtn = document.getElementById('closeLoginBtn');
+    const toggleAuthMode = document.getElementById('toggleAuthMode');
+    const authTitle = document.getElementById('authTitle');
+    const authSubmitBtn = document.getElementById('authSubmitBtn');
+    const authEmail = document.getElementById('authEmail');
+    const authPassword = document.getElementById('authPassword');
+    
+    let isLoginMode = true;
+
+    if (loginModal && openLoginBtn && closeLoginBtn) {
+        openLoginBtn.addEventListener('click', async () => {
+            if (openLoginBtn.textContent === 'LOGOUT') {
+                if(window.fbLogout) await window.fbLogout();
+                return;
+            }
+            loginModal.classList.remove('hidden');
+        });
+
+        closeLoginBtn.addEventListener('click', () => {
+            loginModal.classList.add('hidden');
+        });
+
+        loginModal.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.classList.add('hidden');
+            }
+        });
+
+        toggleAuthMode.addEventListener('click', () => {
+            isLoginMode = !isLoginMode;
+            if (isLoginMode) {
+                authTitle.textContent = 'Login';
+                authSubmitBtn.textContent = 'Login';
+                toggleAuthMode.innerHTML = 'Need an account? <span class="gradient-text">Sign up</span>';
+            } else {
+                authTitle.textContent = 'Sign Up';
+                authSubmitBtn.textContent = 'Sign Up';
+                toggleAuthMode.innerHTML = 'Already have an account? <span class="gradient-text">Login</span>';
+            }
+        });
+
+        authSubmitBtn.addEventListener('click', async () => {
+            const email = authEmail.value;
+            const password = authPassword.value;
+            
+            if(!email || !password) {
+                alert("Please enter email and password.");
+                return;
+            }
+
+            authSubmitBtn.textContent = 'Loading...';
+            try {
+                if (isLoginMode) {
+                    await window.fbLogin(email, password);
+                } else {
+                    await window.fbSignup(email, password);
+                }
+                loginModal.classList.add('hidden');
+            } catch (error) {
+                alert(error.message);
+            } finally {
+                authSubmitBtn.textContent = isLoginMode ? 'Login' : 'Sign Up';
+            }
+        });
+    }
 });

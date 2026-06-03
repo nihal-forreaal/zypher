@@ -97,6 +97,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         let selectedFile = null;
+        const fileInput = document.getElementById('fileInput');
+
+        // Click to browse
+        if (fileInput) {
+            dropzone.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    selectedFile = e.target.files[0];
+                    dropzone.querySelector('p').innerHTML = `Selected: <span class="gradient-text">${selectedFile.name}</span>`;
+                }
+            });
+        }
 
         dropzone.addEventListener('drop', (e) => {
             let dt = e.dataTransfer;

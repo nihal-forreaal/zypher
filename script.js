@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Zypher Com initialized.');
+    console.log('Zypher KRT initialized.');
 
     // Add a simple interaction effect to the glass card
     const card = document.querySelector('.glass-card');

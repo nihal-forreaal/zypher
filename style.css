@@ -510,3 +510,67 @@ body.dark-mode .toggle-thumb {
         font-size: 3rem;
     }
 }
+
+/* Login Modal Redesign */
+#loginModal .modal-content {
+    background: #b0b5c0 !important;
+    border: none !important;
+    border-radius: 20px !important;
+    padding: 2.5rem !important;
+    color: #1e293b !important;
+    backdrop-filter: none !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+#loginModal h3 {
+    color: #1e293b !important;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+#loginModal input {
+    background: rgba(255, 255, 255, 0.3) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: #1e293b !important;
+    border-radius: 8px !important;
+}
+
+#loginModal input::placeholder {
+    color: #64748b !important;
+}
+
+#loginModal #forgotPasswordBtn {
+    color: #64748b !important;
+    font-weight: 500;
+}
+
+#loginModal #authSubmitBtn {
+    background: #3b82f6 !important;
+    color: white !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
+}
+
+#loginModal #authSubmitBtn:hover {
+    background: #2563eb !important;
+    transform: none !important;
+}
+
+#loginModal .close-btn {
+    color: #64748b !important;
+}
+
+#loginModal .close-btn:hover {
+    color: #1e293b !important;
+}
+
+#loginModal #toggleAuthMode {
+    color: #64748b !important;
+}
+
+#loginModal #toggleAuthMode span {
+    color: #3b82f6 !important;
+    -webkit-text-fill-color: #3b82f6 !important;
+    background: none !important;
+}

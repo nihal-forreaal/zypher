@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 try {
                     forgotPasswordBtn.textContent = 'Sending...';
                     await window.fbResetPassword(email);
-                    alert("Password reset email sent! Please check your inbox.");
+                    alert("Password reset email sent! Please check your inbox (and your spam/junk folder).");
                 } catch (error) {
                     alert("Error: " + error.message);
                 } finally {

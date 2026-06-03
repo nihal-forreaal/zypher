@@ -30,4 +30,58 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Upload Modal Logic
+    const modal = document.getElementById('uploadModal');
+    const openBtn = document.getElementById('openUploadBtn');
+    const closeBtn = document.getElementById('closeUploadBtn');
+    const dropzone = document.getElementById('dropzone');
+
+    if (modal && openBtn && closeBtn) {
+        openBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+
+        // Close on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+    }
+
+    if (dropzone) {
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropzone.addEventListener(eventName, () => {
+                dropzone.classList.add('dragover');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, () => {
+                dropzone.classList.remove('dragover');
+            }, false);
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+            let dt = e.dataTransfer;
+            let files = dt.files;
+            if(files.length) {
+                dropzone.querySelector('p').innerHTML = `Selected: <span class="gradient-text">${files[0].name}</span>`;
+            }
+        });
+    }
 });

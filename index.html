@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zypher KRT | Next-Gen Solutions</title>
-    <meta name="description" content="Experience the future of digital solutions with Zypher KRT.">
+    <title>Zypher KRT | Premium Editing Assets</title>
+    <meta name="description" content="Download high-quality video editing assets, overlays, and transitions at Zypher KRT.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -16,36 +16,87 @@
         <div class="logo">Zypher KRT.</div>
         <nav>
             <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#assets">Assets</a></li>
+                <li><a href="#categories">Categories</a></li>
             </ul>
         </nav>
-        <button class="cta-button">Get Started</button>
+        <button class="cta-button" id="openUploadBtn">Upload Asset</button>
     </header>
 
     <main class="hero-section">
         <div class="hero-content">
-            <h1 class="hero-title">Elevate Your Reality with <span class="gradient-text">Zypher KRT</span></h1>
-            <p class="hero-subtitle">We build dynamic, forward-thinking web experiences that blend art and technology.</p>
+            <h1 class="hero-title">Elevate Your Edits with <span class="gradient-text">Zypher KRT</span></h1>
+            <p class="hero-subtitle">Discover high-quality video overlays, transitions, and effects to take your content to the next level.</p>
             <div class="hero-actions">
-                <button class="primary-button">Explore Services</button>
-                <button class="secondary-button">Watch Demo</button>
+                <button class="primary-button" onclick="document.getElementById('assets').scrollIntoView({behavior: 'smooth'})">Browse Assets</button>
             </div>
         </div>
         <div class="hero-visual">
             <div class="floating-orb orb-1"></div>
             <div class="floating-orb orb-2"></div>
             <div class="glass-card main-card">
-                <h3>System Status</h3>
+                <h3>Latest Overlay</h3>
                 <div class="status-indicator">
-                    <span class="pulse-dot"></span> Online and Ready
+                    <span class="pulse-dot"></span> 4K Light Leak
                 </div>
                 <div class="data-bar"></div>
                 <div class="data-bar short"></div>
             </div>
         </div>
     </main>
+
+    <section id="assets" class="gallery-section">
+        <h2 class="section-title">Trending Assets</h2>
+        <div class="asset-grid">
+            <!-- Asset Card 1 -->
+            <div class="asset-card">
+                <div class="asset-thumbnail glitch-thumb"></div>
+                <div class="asset-info">
+                    <h4>Glitch Transition Pack</h4>
+                    <p>1080p • 60fps • .mp4</p>
+                    <button class="download-btn">Download</button>
+                </div>
+            </div>
+            <!-- Asset Card 2 -->
+            <div class="asset-card">
+                <div class="asset-thumbnail lightleak-thumb"></div>
+                <div class="asset-info">
+                    <h4>Cinematic Light Leaks</h4>
+                    <p>4K • Prores • .mov</p>
+                    <button class="download-btn">Download</button>
+                </div>
+            </div>
+            <!-- Asset Card 3 -->
+            <div class="asset-card">
+                <div class="asset-thumbnail filmgrain-thumb"></div>
+                <div class="asset-info">
+                    <h4>Vintage Film Grain 8mm</h4>
+                    <p>4K • Loopable • .mp4</p>
+                    <button class="download-btn">Download</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal-overlay hidden">
+        <div class="modal-content glass-card">
+            <button id="closeUploadBtn" class="close-btn">&times;</button>
+            <h3>Upload New Asset</h3>
+            <p class="modal-subtitle">Share your custom overlays with the community.</p>
+            <div class="upload-dropzone" id="dropzone">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <p>Drag and drop your file here, or <span class="gradient-text">click to browse</span></p>
+            </div>
+            <div class="modal-actions">
+                <button class="primary-button full-width">Upload</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

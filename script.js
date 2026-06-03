@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
         body.classList.add('dark-mode');
-        if(themeToggle) themeToggle.textContent = '☀️';
     }
 
     if(themeToggle) {
@@ -46,10 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
             body.classList.toggle('dark-mode');
             if (body.classList.contains('dark-mode')) {
                 localStorage.setItem('theme', 'dark');
-                themeToggle.textContent = '☀️';
             } else {
                 localStorage.setItem('theme', 'light');
-                themeToggle.textContent = '🌙';
             }
         });
     }

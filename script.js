@@ -123,6 +123,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     modal.classList.add('hidden');
                     selectedFile = null;
                     dropzone.querySelector('p').innerHTML = `Drag and drop your file here, or <span class="gradient-text">click to browse</span>`;
+                    
+                    // Re-render the gallery to show the new asset immediately!
+                    if (typeof renderAssets === 'function') {
+                        renderAssets();
+                    }
                 } catch (error) {
                     alert("Upload failed: " + error.message);
                 } finally {
@@ -200,4 +205,51 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Dynamic Asset Loading
+    const assetGrid = document.getElementById('assetGrid');
+    
+    async function renderAssets() {
+        if (!assetGrid) return;
+        
+        // Wait for Firebase module to load
+        if (typeof window.fbGetAssets !== 'function') {
+            setTimeout(renderAssets, 100);
+            return;
+        }
+
+        try {
+            const assets = await window.fbGetAssets();
+            if (assets && assets.length > 0) {
+                assetGrid.innerHTML = ''; // Clear hardcoded examples
+                assets.forEach(asset => {
+                    const card = document.createElement('div');
+                    card.className = 'asset-card';
+                    card.innerHTML = `
+                        <div class="asset-thumbnail" style="background: linear-gradient(45deg, #1e293b, #0f172a);"></div>
+                        <div class="asset-info">
+                            <h4>${asset.title || 'Untitled Asset'}</h4>
+                            <p>${asset.info || 'Uploaded by ' + (asset.uploaderEmail || 'Community')}</p>
+                            <button class="download-btn" onclick="window.open('${asset.fileUrl}', '_blank')">Download</button>
+                        </div>
+                    `;
+                    assetGrid.appendChild(card);
+                });
+            }
+        } catch(e) {
+            console.error("Failed to load dynamic assets:", e);
+        }
+    }
+    
+    // Call render once on load, and also when an upload finishes!
+    renderAssets();
+
+    // Re-render after successful upload
+    if (confirmUploadBtn) {
+        const oldUploadListener = confirmUploadBtn.onclick; // Not strictly needed as we used addEventListener, but we can hook into it
+        confirmUploadBtn.addEventListener('click', () => {
+            // we will just wait a bit after upload and refresh
+        });
+    }
+
 });

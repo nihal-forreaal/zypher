@@ -161,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const authSubmitBtn = document.getElementById('authSubmitBtn');
     const authEmail = document.getElementById('authEmail');
     const authPassword = document.getElementById('authPassword');
+    const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
     
     let isLoginMode = true;
 
@@ -189,12 +190,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 authTitle.textContent = 'Login';
                 authSubmitBtn.textContent = 'Login';
                 toggleAuthMode.innerHTML = 'Need an account? <span class="gradient-text">Sign up</span>';
+                if(forgotPasswordBtn) forgotPasswordBtn.style.display = 'block';
             } else {
                 authTitle.textContent = 'Sign Up';
                 authSubmitBtn.textContent = 'Sign Up';
                 toggleAuthMode.innerHTML = 'Already have an account? <span class="gradient-text">Login</span>';
+                if(forgotPasswordBtn) forgotPasswordBtn.style.display = 'none';
             }
         });
+
+        if (forgotPasswordBtn) {
+            forgotPasswordBtn.addEventListener('click', async () => {
+                const email = authEmail.value;
+                if (!email) {
+                    alert("Please enter your email address in the box above first.");
+                    return;
+                }
+                try {
+                    forgotPasswordBtn.textContent = 'Sending...';
+                    await window.fbResetPassword(email);
+                    alert("Password reset email sent! Please check your inbox.");
+                } catch (error) {
+                    alert("Error: " + error.message);
+                } finally {
+                    forgotPasswordBtn.textContent = 'Forgot Password?';
+                }
+            });
+        }
 
         authSubmitBtn.addEventListener('click', async () => {
             const email = authEmail.value;

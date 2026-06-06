@@ -510,7 +510,50 @@ body.dark-mode .toggle-thumb {
     }
 
     .hero-title {
-        font-size: 3rem;
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .glass-nav {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .nav-links {
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-visual {
+        width: 100%;
+        height: auto;
+        min-height: 350px;
+    }
+
+    .orb-1 { width: 200px; height: 200px; }
+    .orb-2 { width: 150px; height: 150px; }
+
+    .glass-card {
+        width: 100%;
+        max-width: 300px;
+        transform: none !important; /* Disable 3D tilt on mobile to prevent overflow */
+    }
+
+    #loginModal .modal-content, #supportModal .modal-content {
+        padding: 1.5rem !important;
+        width: 95%;
+    }
+    
+    .cta-button, .primary-button, .secondary-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
     }
 }
 

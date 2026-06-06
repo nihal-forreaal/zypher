@@ -182,8 +182,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         supporters.forEach(supporter => {
             const li = document.createElement('li');
-            li.style.cssText = 'padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.05);';
-            li.innerHTML = `<strong style="color: #3b82f6;">${supporter.name}</strong> <span style="color: #64748b;">- ${supporter.message}</span>`;
+            li.style.cssText = 'padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); color: #1e293b; font-weight: 600;';
+            li.innerHTML = `🌟 ${supporter.name}`;
             supportersList.appendChild(li);
         });
     };
@@ -202,7 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (submitSupporterBtn) {
         submitSupporterBtn.addEventListener('click', async () => {
             const name = supporterName.value.trim();
-            const message = supporterMessage.value.trim();
             if (!name) {
                 alert("Please enter your name!");
                 return;
@@ -210,14 +209,14 @@ document.addEventListener('DOMContentLoaded', () => {
             submitSupporterBtn.textContent = 'Submitting...';
             submitSupporterBtn.disabled = true;
             try {
-                await window.fbAddSupporter(name, message);
+                await window.fbAddSupporter(name);
                 supporterName.value = '';
-                supporterMessage.value = '';
+                alert("Thank you! Your support has been submitted and will appear on the site once approved by the admin.");
                 await loadSupporters();
             } catch (error) {
                 alert("Failed to submit message. Please try again.");
             } finally {
-                submitSupporterBtn.textContent = 'Submit';
+                submitSupporterBtn.textContent = 'Submit for Approval';
                 submitSupporterBtn.disabled = false;
             }
         });

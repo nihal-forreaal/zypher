@@ -144,11 +144,11 @@ window.fbGetAssets = async () => {
     }
 };
 
-window.fbAddSupporter = async (name, message) => {
+window.fbAddSupporter = async (name) => {
     try {
         await addDoc(collection(db, "supporters"), {
             name: name || "Anonymous",
-            message: message || "Supported the project!",
+            approved: false,
             createdAt: serverTimestamp()
         });
     } catch (error) {
@@ -163,7 +163,10 @@ window.fbGetSupporters = async () => {
         const querySnapshot = await getDocs(q);
         const supporters = [];
         querySnapshot.forEach((doc) => {
-            supporters.push({ id: doc.id, ...doc.data() });
+            const data = doc.data();
+            if (data.approved === true) {
+                supporters.push({ id: doc.id, ...data });
+            }
         });
         return supporters;
     } catch (error) {

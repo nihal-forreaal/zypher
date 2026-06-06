@@ -164,29 +164,30 @@
 
     <!-- Support Modal -->
     <div id="supportModal" class="modal-overlay hidden">
-        <div class="modal-content glass-card" style="text-align: center; background: #b0b5c0; border: none; border-radius: 20px; padding: 2.5rem; color: #1e293b; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);">
-            <button id="closeSupportBtn" class="close-btn" style="color: #64748b;">&times;</button>
-            <h3 style="color: #1e293b; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">Support the Creator</h3>
+        <div class="modal-content glass-card" style="text-align: center; max-width: 400px; margin: auto;">
+            <button id="closeSupportBtn" class="close-btn">&times;</button>
+            <h3 style="margin-bottom: 0.5rem;">Support the Creator</h3>
             <p style="color: #64748b; margin-bottom: 1.5rem; font-size: 0.95rem;">Scan the QR code below to send a tip and help keep Zypher running!</p>
-            <div style="background: white; padding: 1rem; border-radius: 16px; display: inline-block; margin-bottom: 1.5rem; border: 1px solid rgba(0,0,0,0.1);">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi%3A%2F%2Fpay%3Fpa%3Dahammednihal%40fam%26pn%3DAhammed%2520Nihal%2520VK" alt="Scan to Pay QR Code" style="width: 250px; height: 250px; display: block; border-radius: 8px;">
+            
+            <div style="background: white; padding: 1rem; border-radius: 16px; display: inline-block; margin-bottom: 1.5rem; border: 1px solid rgba(0,0,0,0.1); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi%3A%2F%2Fpay%3Fpa%3Dahammednihal%40fam%26pn%3DAhammed%2520Nihal%2520VK" alt="Scan to Pay QR Code" style="width: 200px; height: 200px; display: block; border-radius: 8px;">
             </div>
             
-            <div id="supporterFormContainer" style="text-align: left; background: rgba(255,255,255,0.3); padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid rgba(0,0,0,0.1);">
-                <h4 style="margin-bottom: 0.5rem; color: #1e293b; font-size: 1rem;">Did you leave a tip?</h4>
-                <input type="text" id="supporterName" placeholder="Your Name" style="width: 100%; padding: 0.6rem; margin-bottom: 0.5rem; border-radius: 8px; border: 1px solid rgba(0,0,0,0.1); background: white; color: #1e293b; font-family: inherit;">
-                <input type="text" id="supporterMessage" placeholder="Leave a short message..." style="width: 100%; padding: 0.6rem; margin-bottom: 0.5rem; border-radius: 8px; border: 1px solid rgba(0,0,0,0.1); background: white; color: #1e293b; font-family: inherit;">
-                <button id="submitSupporterBtn" class="primary-button full-width" style="padding: 0.6rem; font-size: 0.9rem; border-radius: 8px;">Submit</button>
+            <div id="supporterFormContainer" style="text-align: left; background: rgba(255,255,255,0.4); padding: 1.25rem; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid rgba(0,0,0,0.05);">
+                <h4 style="margin-bottom: 1rem; color: #1e293b; font-size: 1rem; font-weight: 700;">Did you leave a tip?</h4>
+                <div style="display:flex; flex-direction:column; gap:0.75rem;">
+                    <input type="text" id="supporterName" placeholder="Your Name" style="width: 100%; padding: 0.8rem; font-family: inherit;">
+                    <input type="text" id="supporterMessage" placeholder="Leave a short message..." style="width: 100%; padding: 0.8rem; font-family: inherit;">
+                    <button id="submitSupporterBtn" class="primary-button full-width" style="padding: 0.8rem;">Submit</button>
+                </div>
             </div>
             
-            <div id="recentSupportersContainer" style="text-align: left; max-height: 150px; overflow-y: auto; background: rgba(255,255,255,0.3); padding: 1rem; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);">
-                <h4 style="margin-bottom: 0.5rem; color: #1e293b; font-size: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 0.25rem;">Recent Supporters</h4>
+            <div id="recentSupportersContainer" style="text-align: left; max-height: 150px; overflow-y: auto; background: rgba(255,255,255,0.4); padding: 1.25rem; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05);">
+                <h4 style="margin-bottom: 0.75rem; color: #1e293b; font-size: 1rem; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 0.5rem; font-weight: 700;">Recent Supporters</h4>
                 <ul id="supportersList" style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; color: #1e293b;">
                     <li style="padding: 0.5rem 0; color: #64748b;">Loading...</li>
                 </ul>
             </div>
-            
-            <p style="font-size: 0.85rem; color: #64748b; margin-top: 1.5rem;">Thank you for your support! ❤️</p>
         </div>
     </div>
 

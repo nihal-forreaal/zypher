@@ -1,0 +1,16 @@
+{
+  "name": "zypher",
+  "version": "1.0.0",
+  "description": "Premium Editing Assets - Zypher",
+  "type": "module",
+  "scripts": {
+    "dev": "npx http-server -p 3000",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": ["video", "editing", "assets"],
+  "author": "Zypher",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/analytics": "^1.1.1"
+  }
+}

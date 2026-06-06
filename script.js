@@ -163,6 +163,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const authPassword = document.getElementById('authPassword');
     const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
     
+    // Support Modal Logic
+    const supportModal = document.getElementById('supportModal');
+    const openSupportBtn = document.getElementById('openSupportBtn');
+    const closeSupportBtn = document.getElementById('closeSupportBtn');
+
+    if (openSupportBtn && supportModal) {
+        openSupportBtn.addEventListener('click', () => supportModal.classList.remove('hidden'));
+        closeSupportBtn.addEventListener('click', () => supportModal.classList.add('hidden'));
+        supportModal.addEventListener('click', (e) => {
+            if (e.target === supportModal) supportModal.classList.add('hidden');
+        });
+    }
+    
     let isLoginMode = true;
 
     if (loginModal && openLoginBtn && closeLoginBtn) {

@@ -32,6 +32,7 @@
                     <div class="toggle-thumb"></div>
                 </div>
             </button>
+            <button class="cta-button" id="openSupportBtn" style="padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; cursor: pointer; background: linear-gradient(135deg, #10b981 0%, #059669 100%);">Support</button>
             <button class="secondary-button" id="openLoginBtn" style="padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; cursor: pointer;">Login</button>
         </div>
     </header>
@@ -158,6 +159,19 @@
                 </button>
             </div>
             <p id="toggleAuthMode" style="margin-top: 1rem; cursor: pointer; color: var(--text-muted); font-size: 0.9rem;">Need an account? <span class="gradient-text">Sign up</span></p>
+        </div>
+    </div>
+
+    <!-- Support Modal -->
+    <div id="supportModal" class="modal-overlay hidden">
+        <div class="modal-content glass-card" style="text-align: center; background: #b0b5c0; border: none; border-radius: 20px; padding: 2.5rem; color: #1e293b; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);">
+            <button id="closeSupportBtn" class="close-btn" style="color: #64748b;">&times;</button>
+            <h3 style="color: #1e293b; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">Support the Creator</h3>
+            <p style="color: #64748b; margin-bottom: 1.5rem; font-size: 0.95rem;">Scan the QR code below to send a tip and help keep Zypher running!</p>
+            <div style="background: white; padding: 1rem; border-radius: 16px; display: inline-block; margin-bottom: 1.5rem; border: 1px solid rgba(0,0,0,0.1);">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Replace%20Me" alt="Scan to Pay QR Code" style="width: 200px; height: 200px; display: block; border-radius: 8px;">
+            </div>
+            <p style="font-size: 0.85rem; color: #64748b;">Thank you for your support! ❤️</p>
         </div>
     </div>
 

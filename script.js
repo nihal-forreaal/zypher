@@ -51,65 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Upload Modal Logic
-    const modal = document.getElementById('uploadModal');
-    const openBtn = document.getElementById('openUploadBtn');
-    const closeBtn = document.getElementById('closeUploadBtn');
-    const dropzone = document.getElementById('dropzone');
-
-    if (modal && openBtn && closeBtn) {
-        openBtn.addEventListener('click', () => {
-            modal.classList.remove('hidden');
-        });
-
-        closeBtn.addEventListener('click', () => {
-            modal.classList.add('hidden');
-        });
-
-        // Close on outside click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.add('hidden');
-            }
-        });
-    }
-
-        const confirmUploadBtn = document.getElementById('confirmUploadBtn');
-        const assetNameInput = document.getElementById('assetNameInput');
-        const gdriveLinkInput = document.getElementById('gdriveLinkInput');
-
-        if (confirmUploadBtn) {
-            confirmUploadBtn.addEventListener('click', async () => {
-                const name = assetNameInput.value.trim();
-                const link = gdriveLinkInput.value.trim();
-                
-                if (!name || !link) {
-                    alert("Please provide both an asset name and a Google Drive link.");
-                    return;
-                }
-                
-                try {
-                    confirmUploadBtn.textContent = 'Sharing...';
-                    confirmUploadBtn.disabled = true;
-                    
-                    await window.fbShareLink(name, link);
-                    
-                    alert('Google Drive Link shared successfully!');
-                    modal.classList.add('hidden');
-                    assetNameInput.value = '';
-                    gdriveLinkInput.value = '';
-                    
-                    if (typeof renderAssets === 'function') {
-                        renderAssets();
-                    }
-                } catch (error) {
-                    alert("Share failed: " + error.message);
-                } finally {
-                    confirmUploadBtn.textContent = 'Share Link';
-                    confirmUploadBtn.disabled = false;
-                }
-            });
-        }
+    // Removed upload logic as per user request
 
     // Authentication Modal Logic
     const loginModal = document.getElementById('loginModal');

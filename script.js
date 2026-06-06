@@ -359,7 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="asset-thumbnail" style="background: linear-gradient(45deg, #1e293b, #0f172a);"></div>
                         <div class="asset-info">
                             <h4>${asset.title || 'Untitled Asset'}</h4>
-                            <p>${asset.info || 'Uploaded by ' + (asset.uploaderEmail || 'Community')}</p>
+                            <p>${asset.info || 'Verified Upload'}</p>
                             <button class="download-btn" onclick="window.open('${asset.fileUrl}', '_blank')">Download</button>
                         </div>
                     `;

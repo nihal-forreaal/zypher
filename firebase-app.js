@@ -117,7 +117,6 @@ window.fbUploadAsset = async (file, assetName, assetInfo, progressCallback) => {
                         info: assetInfo || "Custom Upload",
                         fileUrl: downloadURL,
                         uploaderId: auth.currentUser.uid,
-                        uploaderEmail: auth.currentUser.email,
                         createdAt: serverTimestamp()
                     });
                     resolve(docRef.id);

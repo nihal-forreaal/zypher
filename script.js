@@ -110,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
-    }
 
     // Authentication Modal Logic
     const loginModal = document.getElementById('loginModal');

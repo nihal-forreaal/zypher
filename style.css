@@ -496,13 +496,26 @@ body.dark-mode .toggle-thumb {
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+    .hero-section {
+        padding: 0 3%;
+    }
+    .gallery-section {
+        padding: 4rem 3%;
+    }
+}
+
 @media (max-width: 968px) {
     .hero-section {
         flex-direction: column;
         justify-content: center;
         text-align: center;
         gap: 4rem;
-        padding-top: 6rem;
+        padding-top: 8rem;
+    }
+
+    .hero-content {
+        max-width: 100%;
     }
 
     .hero-actions {
@@ -543,6 +556,7 @@ body.dark-mode .toggle-thumb {
     .glass-card {
         width: 100%;
         max-width: 300px;
+        margin: 0 auto;
         transform: none !important; /* Disable 3D tilt on mobile to prevent overflow */
     }
 
@@ -554,6 +568,49 @@ body.dark-mode .toggle-thumb {
     .cta-button, .primary-button, .secondary-button {
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .hero-section {
+        padding-top: 10rem;
+    }
+    
+    .glass-nav {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .nav-links {
+        gap: 0.5rem;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+    }
+    
+    .cta-button, .primary-button, .secondary-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+    
+    .glass-card {
+        padding: 1.25rem;
+    }
+    
+    .gallery-section {
+        padding: 3rem 1rem;
+    }
+    
+    .asset-grid {
+        grid-template-columns: 1fr;
     }
 }
 

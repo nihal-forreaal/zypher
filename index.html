@@ -121,22 +121,16 @@
 
     <!-- Upload Modal -->
     <div id="uploadModal" class="modal-overlay hidden">
-        <div class="modal-content glass-card">
+        <div class="modal-content glass-card" style="text-align: center; max-width: 450px; margin: auto;">
             <button id="closeUploadBtn" class="close-btn">&times;</button>
-            <h3>Upload New Asset</h3>
-            <p class="modal-subtitle">Share your custom overlays with the community.</p>
-            <div class="upload-dropzone" id="dropzone">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                    <polyline points="17 8 12 3 7 8"></polyline>
-                    <line x1="12" y1="3" x2="12" y2="15"></line>
-                </svg>
-                <p>Drag and drop your file here, or <span class="gradient-text">click to browse</span></p>
-                <input type="file" id="fileInput" style="display: none;">
+            <h3 style="margin-bottom: 0.5rem;">Share a Google Drive Link</h3>
+            <p class="modal-subtitle">Share your resources securely via Google Drive.</p>
+            
+            <div style="text-align: left; margin-bottom: 1.5rem;">
+                <input type="text" id="assetNameInput" placeholder="Asset Name (e.g. Video Template)" style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border-radius: 8px; border: 1px solid rgba(0,0,0,0.1); font-family: inherit; background: rgba(255,255,255,0.8);">
+                <input type="url" id="gdriveLinkInput" placeholder="Paste Google Drive Link Here" style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid rgba(0,0,0,0.1); font-family: inherit; background: rgba(255,255,255,0.8);">
             </div>
-            <div class="modal-actions">
-                <button class="primary-button full-width" id="confirmUploadBtn">Upload</button>
-            </div>
+            <button id="confirmUploadBtn" class="primary-button full-width">Share Link</button>
         </div>
     </div>
 

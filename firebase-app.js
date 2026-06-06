@@ -87,45 +87,24 @@ onAuthStateChanged(auth, (user) => {
 // ==========================================
 // DATABASE & STORAGE LOGIC
 // ==========================================
-window.fbUploadAsset = async (file, assetName, assetInfo, progressCallback) => {
+window.fbShareLink = async (assetName, driveLink) => {
     if (!auth.currentUser) {
-        throw new Error("You must be logged in to upload assets.");
+        throw new Error("You must be logged in to share assets.");
     }
-
-    // 1. Upload File to Storage
-    const storageRef = ref(storage, 'assets/' + Date.now() + '_' + file.name);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-
-    return new Promise((resolve, reject) => {
-        uploadTask.on('state_changed', 
-            (snapshot) => {
-                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                if(progressCallback) progressCallback(progress);
-            }, 
-            (error) => {
-                console.error("Upload Error:", error);
-                reject(error);
-            }, 
-            async () => {
-                // 2. Get Download URL
-                const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                
-                // 3. Save Metadata to Firestore
-                try {
-                    const docRef = await addDoc(collection(db, "assets"), {
-                        title: assetName || file.name,
-                        info: assetInfo || "Custom Upload",
-                        fileUrl: downloadURL,
-                        uploaderId: auth.currentUser.uid,
-                        createdAt: serverTimestamp()
-                    });
-                    resolve(docRef.id);
-                } catch(e) {
-                    reject(e);
-                }
-            }
-        );
-    });
+    
+    try {
+        const docRef = await addDoc(collection(db, "assets"), {
+            title: assetName,
+            info: "Google Drive Link",
+            fileUrl: driveLink,
+            uploaderId: auth.currentUser.uid,
+            createdAt: serverTimestamp()
+        });
+        return docRef.id;
+    } catch(e) {
+        console.error("Share Error:", e);
+        throw e;
+    }
 };
 
 window.fbGetAssets = async () => {

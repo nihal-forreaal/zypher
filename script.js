@@ -74,79 +74,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (dropzone) {
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropzone.addEventListener(eventName, preventDefaults, false);
-        });
-
-        function preventDefaults(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropzone.addEventListener(eventName, () => {
-                dropzone.classList.add('dragover');
-            }, false);
-        });
-
-        ['dragleave', 'drop'].forEach(eventName => {
-            dropzone.addEventListener(eventName, () => {
-                dropzone.classList.remove('dragover');
-            }, false);
-        });
-
-        let selectedFile = null;
-        const fileInput = document.getElementById('fileInput');
-
-        // Click to browse
-        if (fileInput) {
-            dropzone.addEventListener('click', () => {
-                fileInput.click();
-            });
-
-            fileInput.addEventListener('change', (e) => {
-                if (e.target.files.length) {
-                    selectedFile = e.target.files[0];
-                    dropzone.querySelector('p').innerHTML = `Selected: <span class="gradient-text">${selectedFile.name}</span>`;
-                }
-            });
-        }
-
-        dropzone.addEventListener('drop', (e) => {
-            let dt = e.dataTransfer;
-            let files = dt.files;
-            if(files.length) {
-                selectedFile = files[0];
-                dropzone.querySelector('p').innerHTML = `Selected: <span class="gradient-text">${selectedFile.name}</span>`;
-            }
-        });
-
         const confirmUploadBtn = document.getElementById('confirmUploadBtn');
+        const assetNameInput = document.getElementById('assetNameInput');
+        const gdriveLinkInput = document.getElementById('gdriveLinkInput');
+
         if (confirmUploadBtn) {
             confirmUploadBtn.addEventListener('click', async () => {
-                if (!selectedFile) {
-                    alert("Please select a file first.");
+                const name = assetNameInput.value.trim();
+                const link = gdriveLinkInput.value.trim();
+                
+                if (!name || !link) {
+                    alert("Please provide both an asset name and a Google Drive link.");
                     return;
                 }
+                
                 try {
-                    confirmUploadBtn.textContent = 'Uploading...';
-                    await window.fbUploadAsset(selectedFile, selectedFile.name, 'Uploaded via Web', (progress) => {
-                        confirmUploadBtn.textContent = `Uploading... ${Math.round(progress)}%`;
-                    });
-                    alert('Upload successful!');
-                    modal.classList.add('hidden');
-                    selectedFile = null;
-                    dropzone.querySelector('p').innerHTML = `Drag and drop your file here, or <span class="gradient-text">click to browse</span>`;
+                    confirmUploadBtn.textContent = 'Sharing...';
+                    confirmUploadBtn.disabled = true;
                     
-                    // Re-render the gallery to show the new asset immediately!
+                    await window.fbShareLink(name, link);
+                    
+                    alert('Google Drive Link shared successfully!');
+                    modal.classList.add('hidden');
+                    assetNameInput.value = '';
+                    gdriveLinkInput.value = '';
+                    
                     if (typeof renderAssets === 'function') {
                         renderAssets();
                     }
                 } catch (error) {
-                    alert("Upload failed: " + error.message);
+                    alert("Share failed: " + error.message);
                 } finally {
-                    confirmUploadBtn.textContent = 'Upload';
+                    confirmUploadBtn.textContent = 'Share Link';
+                    confirmUploadBtn.disabled = false;
                 }
             });
         }

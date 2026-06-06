@@ -143,3 +143,31 @@ window.fbGetAssets = async () => {
         return [];
     }
 };
+
+window.fbAddSupporter = async (name, message) => {
+    try {
+        await addDoc(collection(db, "supporters"), {
+            name: name || "Anonymous",
+            message: message || "Supported the project!",
+            createdAt: serverTimestamp()
+        });
+    } catch (error) {
+        console.error("Error adding supporter:", error);
+        throw error;
+    }
+};
+
+window.fbGetSupporters = async () => {
+    try {
+        const q = query(collection(db, "supporters"), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
+        const supporters = [];
+        querySnapshot.forEach((doc) => {
+            supporters.push({ id: doc.id, ...doc.data() });
+        });
+        return supporters;
+    } catch (error) {
+        console.error("Error fetching supporters:", error);
+        return [];
+    }
+};

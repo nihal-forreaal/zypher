@@ -167,12 +167,59 @@ document.addEventListener('DOMContentLoaded', () => {
     const supportModal = document.getElementById('supportModal');
     const openSupportBtn = document.getElementById('openSupportBtn');
     const closeSupportBtn = document.getElementById('closeSupportBtn');
+    const submitSupporterBtn = document.getElementById('submitSupporterBtn');
+    const supporterName = document.getElementById('supporterName');
+    const supporterMessage = document.getElementById('supporterMessage');
+    const supportersList = document.getElementById('supportersList');
+
+    const loadSupporters = async () => {
+        if (!window.fbGetSupporters) return;
+        const supporters = await window.fbGetSupporters();
+        supportersList.innerHTML = '';
+        if (supporters.length === 0) {
+            supportersList.innerHTML = '<li style="padding: 0.5rem 0; color: #64748b;">No recent supporters yet. Be the first!</li>';
+            return;
+        }
+        supporters.forEach(supporter => {
+            const li = document.createElement('li');
+            li.style.cssText = 'padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.05);';
+            li.innerHTML = `<strong style="color: #3b82f6;">${supporter.name}</strong> <span style="color: #64748b;">- ${supporter.message}</span>`;
+            supportersList.appendChild(li);
+        });
+    };
 
     if (openSupportBtn && supportModal) {
-        openSupportBtn.addEventListener('click', () => supportModal.classList.remove('hidden'));
+        openSupportBtn.addEventListener('click', () => {
+            supportModal.classList.remove('hidden');
+            loadSupporters();
+        });
         closeSupportBtn.addEventListener('click', () => supportModal.classList.add('hidden'));
         supportModal.addEventListener('click', (e) => {
             if (e.target === supportModal) supportModal.classList.add('hidden');
+        });
+    }
+
+    if (submitSupporterBtn) {
+        submitSupporterBtn.addEventListener('click', async () => {
+            const name = supporterName.value.trim();
+            const message = supporterMessage.value.trim();
+            if (!name) {
+                alert("Please enter your name!");
+                return;
+            }
+            submitSupporterBtn.textContent = 'Submitting...';
+            submitSupporterBtn.disabled = true;
+            try {
+                await window.fbAddSupporter(name, message);
+                supporterName.value = '';
+                supporterMessage.value = '';
+                await loadSupporters();
+            } catch (error) {
+                alert("Failed to submit message. Please try again.");
+            } finally {
+                submitSupporterBtn.textContent = 'Submit';
+                submitSupporterBtn.disabled = false;
+            }
         });
     }
     

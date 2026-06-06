@@ -93,13 +93,21 @@ window.fbShareLink = async (assetName, driveLink) => {
     }
     
     try {
-        const docRef = await addDoc(collection(db, "assets"), {
-            title: assetName,
-            info: "Google Drive Link",
-            fileUrl: driveLink,
-            uploaderId: auth.currentUser.uid,
-            createdAt: serverTimestamp()
-        });
+        const timeout = new Promise((_, reject) => 
+            setTimeout(() => reject(new Error("Connection to the database timed out. Please check if your adblocker or firewall is blocking Firebase.")), 10000)
+        );
+        
+        const docRef = await Promise.race([
+            addDoc(collection(db, "assets"), {
+                title: assetName,
+                info: "Google Drive Link",
+                fileUrl: driveLink,
+                uploaderId: auth.currentUser.uid,
+                createdAt: serverTimestamp()
+            }),
+            timeout
+        ]);
+        
         return docRef.id;
     } catch(e) {
         console.error("Share Error:", e);
